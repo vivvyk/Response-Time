@@ -1,4 +1,5 @@
 import googlemaps
+import pprint
 from datetime import datetime
 import json
 gmaps = googlemaps.Client(key='AIzaSyDSPgOMDFfBFW3YvwHHpNdvBSy838l3NBI')
@@ -9,9 +10,17 @@ gmaps = googlemaps.Client(key='AIzaSyDSPgOMDFfBFW3YvwHHpNdvBSy838l3NBI')
 origin = "3892 Alder Avenue, Freemont, CA"
 destination = "454 Tennessee Ln, Palo Alto, CA"
 
-travel_time = gmaps.directions(origin,destination)
+directions = gmaps.directions(origin,destination)
 
-print travel_time
+pp = pprint.PrettyPrinter(indent=1)
+
+pp.pprint(directions)
+travel_time = directions[0]["legs"][0]["duration"]["text"]
+start_location = [directions[0]["legs"][0]["start_location"]["lat"], directions[0]["legs"][0]["start_location"]["lng"]]
+end_location = [directions[0]["legs"][0]["end_location"]["lat"], directions[0]["legs"][0]["end_location"]["lng"]]
+print(end_location)
+
+
 
 '''
 # Look up an address with reverse geocoding
