@@ -6,7 +6,7 @@ import numpy
 import csv
 import sys
 import time
-gmaps = googlemaps.Client(key='AIzaSyAg-loWjdYNw-DkQ45pdh_b37acplX-BNY')
+gmaps = googlemaps.Client(key='AIzaSyA2yd8ufw56BfqMQcYHPeYtTW1bqdlMkDw')
 
 def lessthan(time1, time2):
     if "hours" in time1:
@@ -25,6 +25,10 @@ def lessthan(time1, time2):
     
 origin = "3892 Alder Avenue, Freemont, CA"
 reader = csv.reader(open("Hospital_General_Information.csv", "rb"), delimiter=",")
+
+result = gmaps.geocode(origin)
+
+origin_coord = [result[0]["geometry"]["location"]["lat"], result[0]["geometry"]["location"]["lng"]] 
 
 states = {}
 for i,v in enumerate(reader):
